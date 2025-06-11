@@ -39,7 +39,7 @@ git clone https://github.com/hamanakakohei/intolerance
   --out_vcf results/gnomad_rnu4-2.vcf
 
 
-# ２．そのリストを与えて、指定したゲノム領域におけるgnomadバリアントの分布を絵にする
+# ２．そのVCFを与えて、指定したゲノム領域におけるgnomadバリアントの分布を絵にする
 ./scripts/02_plot_gnomad_variants.R \
   --vcf results/gnomad_rnu4-2.vcf \
   --ref_ver GRCh38 \
