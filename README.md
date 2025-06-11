@@ -8,7 +8,7 @@
 
 
 
-## 🔧 ０．インストール方法
+## ０．インストール方法
 
 ```bash
 # condaの仮想環境内で
@@ -28,7 +28,7 @@ git clone https://github.com/hamanakakohei/intolerance
 
 
 
-## 🔧 １．使い方
+## １．使い方
 
 ```bash
 # １．遺伝子名を指定してgnomadバリアントのVCFを得る
