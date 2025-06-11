@@ -31,7 +31,7 @@ git clone https://github.com/hamanakakohei/intolerance
 ## 🔧 １．使い方
 
 ```bash
-# １．遺伝子名を指定してgnomadからバリアントリストを取ってくる
+# １．遺伝子名を指定してgnomadバリアントのVCFを得る
 ./scripts/01_get_gnomad_variants_by_gene.py \
   --gene_symbol RNU4-2 \
   --reference_genome GRCh38 \
@@ -39,7 +39,7 @@ git clone https://github.com/hamanakakohei/intolerance
   --out_vcf results/gnomad_rnu4-2.vcf
 
 
-# ２．そのリストを与えつつ、ゲノム領域を指定してさらに絞って、gnomadバリアントの分布を絵にする
+# ２．そのリストを与えて、指定したゲノム領域におけるgnomadバリアントの分布を絵にする
 ./scripts/02_plot_gnomad_variants.R \
   --vcf results/gnomad_rnu4-2.vcf \
   --ref_ver GRCh38 \
@@ -50,7 +50,7 @@ git clone https://github.com/hamanakakohei/intolerance
   --out results/gnomad_rnu4-2.png
 
 
-# ３．ClinVarのvcfを与えて、ゲノム領域を指定して、バリアントの分布を絵にする
+# ３．指定したゲノム領域におけるClinVarバリアントの分布を絵にする
 # ついでに、ドメインの領域のファイルを与えて、絵にする
 ./scripts/03_plot_clinvar_variants.R \
   --clinvar_vcf data/clinvar.vcf.gz \
