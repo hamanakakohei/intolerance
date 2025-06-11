@@ -6,8 +6,6 @@ library(patchwork)
 library(VariantAnnotation)
 library(argparser)
 
-#script_dir <- dirname(normalizePath(sys.frame(1)$ofile))
-#source(file.path(script_dir, "intolerance_utils.R"))
 source("scripts/intolerance_utils.R")
 
 
@@ -57,7 +55,7 @@ p <- arg_parser("")
 p <- add_argument(p, "--chr",     default='chr12',      help="chr-start-endの領域をプロットする",  type="character")
 p <- add_argument(p, "--start",   default=120291763,    help="chr-start-endの領域をプロットする",  type="numeric")
 p <- add_argument(p, "--end",     default=120291903,    help="chr-start-endの領域をプロットする",  type="numeric")
-p <- add_argument(p, "--ref_ver", default='GRCh38',     help="VariantAnnotationパッケージの挙動に影響するらしい、hg19 or GRCh38",  type="character")
+p <- add_argument(p, "--ref_ver", default='GRCh38',     help="VariantAnnotationパッケージの挙動に影響するらしい",  type="character")
 p <- add_argument(p, "--vcf",     default='output.vcf', help="get_gene-level_gnomad_info.pyで得たvcf、normalizedしなくても大丈夫なはず、、",  type="character")
 p <- add_argument(p, "--min_ac",  default=1,            help="alt allele種類数ヒストグラムを描く時のalt allele ACの閾値",  type="numeric")
 p <- add_argument(p, "--out",     default='output.png', help="",  type="character")

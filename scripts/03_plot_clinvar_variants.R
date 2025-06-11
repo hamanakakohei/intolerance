@@ -7,7 +7,7 @@ library(argparser)
 
 p <- arg_parser("")
 p <- add_argument(p, "--clinvar_vcf",      default='clinvar.vcf.gz',    type="character", help="https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar.vcf.gzとtbi" )
-p <- add_argument(p, "--reference_genome", default='hg38',              type="character", help="VariantAnnotationパッケージの挙動に影響するらしい、hg19 or GRCh38"       )
+p <- add_argument(p, "--reference_genome", default='hg38',              type="character", help="VariantAnnotationパッケージの挙動に影響するらしい"       		 )
 p <- add_argument(p, "--chr",              default='chr12',             type="character", help="chr-start-endの領域をプロットする"                                       )
 p <- add_argument(p, "--start",            default=120291763,           type="numeric",   help="chr-start-endの領域をプロットする"                                       )
 p <- add_argument(p, "--end",              default=120291903,           type="numeric",   help="chr-start-endの領域をプロットする"                                       )
@@ -95,85 +95,3 @@ names(legend) <- c(
 png(argv$out_png, units='cm', width=20, height=10, res=600)
 lolliplot(sample.gr, features, xaxis=xaxis, ranges=ranges, legend=legend, cex=.4)
 dev.off()
-
-
-
-#dict_keys(['obj_type', 'accession', 'accession_version', 'title', 'variation_set', 'supporting_submissions', 'germline_classification', 'clinical_impact_classification', 'oncogenicity_classification', 'record_status', 'gene_sort', 'chr_sort', 'location_sort', 'variation_set_name', 'variation_set_id', 'genes', 'molecular_consequence_list', 'protein_change', 'fda_recognized_database'])
-#
-#
-#
-#from Bio import Entrez
-#Entrez.email = "your.email@example.com"
-#
-## 1. esearch
-#search_handle = Entrez.esearch(db="clinvar", term="TP53[gene]", retmax=10)
-#search_results = Entrez.read(search_handle)
-#ids = search_results["IdList"]
-#
-## 2. esummary（validate=False に変更）
-#summary_handle = Entrez.esummary(db="clinvar", id=",".join(ids), retmode="xml")
-#summary_records = Entrez.read(summary_handle, validate=False)
-#
-## 3. 情報の抽出
-#for record in summary_records['DocumentSummarySet']['DocumentSummary']:
-#    uid = record.attributes['uid']
-#    accession = record.get('accession', 'N/A')
-#    variation_name = record.get('variation_name', 'N/A')
-#    print(f"{uid}\t{accession}\t{variation_name}")
-#
-#
-#
-#import pandas as pd
-#
-#records = summary_records['DocumentSummarySet']['DocumentSummary']
-#
-#def flatten_record(record):
-#    # recordはBio.Entrezのパーサー結果のXMLノードなのでdict-likeだが、
-#    # ネストしたリストや辞書があることが多い
-#    flat = {}
-#    # まずはトップレベルのキーと値を追加（値が文字列か数字の場合のみ）
-#    for key, value in record.items():
-#        # もし値がリストや辞書なら一旦スキップするか文字列化する
-#        if isinstance(value, (str, int, float)):
-#            flat[key] = value
-#        elif value is None:
-#            flat[key] = None
-#        else:
-#            # 複雑なオブジェクトは文字列化で一旦保存
-#            flat[key] = str(value)
-#    #    
-#    # 例えば 'genes' はリストなので最初の遺伝子名だけ抜き出し（例）
-#    genes = record.get('genes')
-#    if genes and isinstance(genes, list):
-#        flat['genes_first'] = genes[0] if len(genes) > 0 else None
-#    else:
-#        flat['genes_first'] = None
-#    #    
-#    # 'protein_change' も複数あるかもしれないので一旦文字列化して格納
-#    protein_change = record.get('protein_change')
-#    if protein_change:
-#        if isinstance(protein_change, list):
-#            flat['protein_change'] = ";".join(str(pc) for pc in protein_change)
-#        else:
-#            flat['protein_change'] = str(protein_change)
-#    else:
-#        flat['protein_change'] = None
-#    #    
-#    # 'variation_set' はリストや複雑なネストがあるので文字列化する例
-#    variation_set = record.get('variation_set')
-#    if variation_set:
-#        flat['variation_set'] = str(variation_set)
-#    else:
-#        flat['variation_set'] = None
-#    #    
-#    return flat
-#
-## すべてのレコードを展開してリストに
-#flat_records = [flatten_record(rec) for rec in records]
-#
-## DataFrameに変換
-#df = pd.DataFrame(flat_records)
-#
-#print(df.head())
-#
-#
